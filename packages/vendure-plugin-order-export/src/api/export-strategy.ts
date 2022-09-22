@@ -13,6 +13,7 @@ import { loggerCtx } from '../constants';
 export interface ExportInput {
   ctx: RequestContext;
   orderService: OrderService;
+  productVariantService: ProductVariantService;
   startDate: Date;
   endDate: Date;
 }
