@@ -3,6 +3,7 @@ import {
   Ctx,
   Logger,
   OrderService,
+  ProductVariantService,
   RequestContext,
 } from '@vendure/core';
 import { ExportPluginConfig, orderExportPermission } from '..';
@@ -36,7 +37,8 @@ export class ParseDatePipe implements PipeTransform {
 export class OrderExportController {
   constructor(
     @Inject(PLUGIN_INIT_OPTIONS) private config: ExportPluginConfig,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private productVariantService ProductVariantService
   ) {}
 
   @Allow(orderExportPermission.Permission)
@@ -70,6 +72,7 @@ export class OrderExportController {
       startDate,
       endDate,
       orderService: this.orderService,
+      productVariantService: this.productVariantService,
     });
     const readStream = fs.createReadStream(filePath);
     res.set({
